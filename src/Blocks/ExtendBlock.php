@@ -8,7 +8,7 @@ use Slade\Template;
 class ExtendBlock
 {
     protected static $tokens = [
-        'view'        => '/^_\s*([\'"$]?\w([\w.]*\w[\'"]?))/',
+        'view'        => '/^_\s*([\'"$]?[\w:]+([\w.]*\w[\'"]?))/',
         'attribute'   => '/^([^\s\/>"\'=]+)=("[^"\r\n\f\v]+"|\'[^\'\r\n\f\v]+\'|\S+)/'
     ];
 

@@ -56,7 +56,7 @@ class TagBlock
             return "<$tagName$attributes />";
         }
 
-        return "<$tagName$attributes>$content$children</$tagName>";;
+        return "<$tagName$attributes>$content$children</$tagName>";
     }
 
     protected static function setAttributes($attributes)
@@ -83,6 +83,13 @@ class TagBlock
             $value = substr($value, 1);
 
             return " $name=\"<?= $value ?>\"";
+        }
+
+        if (ends_with($value, '?'))
+        {
+            $value = substr($value, 0, -1);
+
+            return "<?php if ($value) : ?> $name=\"$name\" <?php endif ?>" ;
         }
 
         if ($value !== 'false')
