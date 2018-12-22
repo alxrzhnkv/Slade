@@ -36,6 +36,13 @@ class ConditionalBlock
         $node      = Block::parse($node);
         $children  = Template::parse($children);
 
+        if (starts_with($statement, '-'))
+        {
+            $statement = trim($statement, '- ');
+
+            return "<?php if (\$__env->yieldContent('$statement')): ?>$node$children<?php endif; ?>";
+        }
+
         return "<?php if ($statement): ?>$node$children<?php endif; ?>";
     }
 

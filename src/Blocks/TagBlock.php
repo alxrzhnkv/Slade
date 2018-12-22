@@ -85,11 +85,18 @@ class TagBlock
             return " $name=\"<?= $value ?>\"";
         }
 
+        if (starts_with($value, '-'))
+        {
+            $value = substr($value, 1);
+
+            return " $name=\"<?= e(\$__env->yieldContent('$value')) ?>\"";
+        }
+
         if (ends_with($value, '?'))
         {
             $value = substr($value, 0, -1);
 
-            return "<?php if ($value) : ?> $name=\"$name\" <?php endif ?>" ;
+            return "<?php if ($value) : ?> $name=\"$name\"<?php endif ?>" ;
         }
 
         if ($value !== 'false')
