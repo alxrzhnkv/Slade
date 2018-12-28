@@ -13,7 +13,7 @@ class TagBlock
     protected static $tokens = [
         'tagName'           => '/^[a-z][\w-]*\b/',
         'identifier'        => '/^([#.])([\w-]+)\b/',
-        'attribute'         => '/^([^\s\/>"\'=]+)=("[^"\r\n\f\v]+"|\'[^\'\r\n\f\v]+\'|\S+)/',
+        'attribute'         => '/^([^\s\/>"\'=]+)=("[^"\r\n\f\v]+"|\'[^\'\r\n\f\v]+\'|[^)]+\))/',
         'variableContent'   => '/^(==|=) *.+/',
         'nodeContent'       => '/^: *([\s\S]*?)(?=\n*$)/D',
         'yieldContent'      => '/^-\s*(\S*)/',
@@ -83,6 +83,13 @@ class TagBlock
             $value = substr($value, 1);
 
             return " $name=\"<?= $value ?>\"";
+        }
+
+        if (starts_with($value, '-') && ends_with($value, ')'))
+        {
+            $value = substr($value, 1);
+
+            return " $name=\"<?= e($value) ?>\"";
         }
 
         if (starts_with($value, '-'))

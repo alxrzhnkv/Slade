@@ -9,7 +9,7 @@ use Slade\Template;
 class IncludeBlock
 {
     protected static $tokens = [
-        'view'            => '/^\+\s*([\'"$]?[\w-]([\w.-]*[\w-][\'"]?))/',
+        'view'            => '/^\+\s*([\'"$]?[\w-]([\w.-:]*[\w-][\'"]?))/',
         'attribute'       => '/^([^\s\/>"\'=]+)=("[^"\r\n\f\v]+"|\'[^\'\r\n\f\v]+\'|\S+)/',
         'textContent'     => '/^(?!=|:).+/',
         'variableContent' => '/^(==|=) *.+/',
